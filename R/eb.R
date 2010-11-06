@@ -42,7 +42,7 @@ eb = function(platform1.data, platform2.data, par.prior=TRUE, filter=FALSE, prio
 	colnames(dat) = as.character(1:(nx+ny))
 	
 	#Call ComBat
-	cb = ComBat(dat, saminfo, par.prior=par.prior, write=F, filter=filter, prior.plots=prior.plots)
+	cb = ComBat(dat, saminfo, par.prior=par.prior, filter=filter, prior.plots=prior.plots)
 	colnames(cb) = orignames
 
 	#Return results
@@ -54,7 +54,7 @@ eb = function(platform1.data, platform2.data, par.prior=TRUE, filter=FALSE, prio
 #This long comment is from the original authors, and describes the original, unmodified version.  I have made changes only to the interface, so it can use a data.frame as input instead of a file name.
 # 'expression_xls' is the expression index file (e.g. outputted by dChip); 'sample_info_file' is a tab-delimited text file containing the colums: Array  name, sample name, Batch, and any other covariates to be included in the modeling; 'type' currently supports two data file types 'txt' for a tab-delimited text file and 'csv' for an Excel .csv file (sometimes R handles the .csv file better, so use this if you have problems with a .txt file!); 'write' if 'T' ComBat writes adjusted data to a file, and if 'F' and ComBat outputs the adjusted data matrix if 'F' (so assign it to an object! i.e. NewData <- ComBat('my expression.xls','Sample info file.txt', write=F)); 'covariates=all' will use all of the columns in your sample info file in the modeling (except array/sample name), if you only want use a some of the columns in your sample info file, specify these columns here as a vector (you must include the Batch column in this list); 'par.prior' if 'T' uses the parametric adjustments, if 'F' uses the nonparametric adjustments--if you are unsure what to use, try the parametric adjustments (they run faster) and check the plots to see if these priors are reasonable; 'filter=value' filters the genes with absent calls in > 1-value of the samples. The defaut here (as well as in dchip) is .8. Filter if you can as the EB adjustments work better after filtering. Filter must be numeric if your expression index file contains presence/absence calls (but you can set it >1 if you don't want to filter any genes) and must be 'F' if your data doesn't have presence/absence calls; 'skip' is the number of columns that contain probe names and gene information, so 'skip=5' implies the first expression values are in column 6; 'prior.plots' if true will give prior plots with black as a kernal estimate of the empirical batch effect density and red as the parametric estimate. 
 
-ComBat <- function(dat, saminfo, type='txt', write=T, covariates='all', par.prior=T, filter=F, skip=0, prior.plots=T){
+ComBat <- function(dat, saminfo, type='txt', covariates='all', par.prior=T, filter=F, skip=0, prior.plots=T){
 	#debug: expression_xls='exp.txt'; sample_info_file='sam.txt'; type='txt'; write=T; covariates='all'; par.prior=T; filter=F; skip=0; prior.plots=T
 	
 	#Two lines commented out by Jason Rudy here:
@@ -197,7 +197,7 @@ ComBat <- function(dat, saminfo, type='txt', write=T, covariates='all', par.prio
 	}
 
 	bayesdata <- (bayesdata*(sqrt(var.pooled)%*%t(rep(1,n.array))))+stand.mean
-	if(write){
+	if(FALSE){
 		output_file <- paste('Adjusted',expression_xls,'.xls',sep='_')
                  #print(geneinfo[1:2])
                  #print(bayesdata[1:2,1:4])

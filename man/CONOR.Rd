@@ -108,9 +108,7 @@ For \code{xpn} and \code{distran} only, \code{L} is the number of assay clusters
 
 }
 
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
 %%  ~Describe the value returned
 %%  If it is a LIST, use
@@ -144,14 +142,11 @@ Warnat et al. Cross-platform analysis of cancer microarray data improves gene ex
 \author{
 Jason Rudy and Faramarz Valafar
 }
-\note{
-%%  ~~further notes~~
-}
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
+
 \examples{
+\dontrun{
 
 #Load the CONORData package
 library(CONORData)
@@ -170,7 +165,7 @@ plot(rowMeans(dwd.output$x[regexpr("_A",colnames(dwd.output$x)) != -1]),
 	 rowMeans(dwd.output$x[regexpr("_A",colnames(dwd.output$y)) != -1]),
 	 xlab="AFX", ylab="ILM")
 
-
+#Other methods - should work if uncommented:
 #Perform XPN
 xpn.output = xpn(platform1.data=MAQC.AFX, platform2.data=MAQC.ILM, skip.match=FALSE, iterations=1)
 
@@ -194,7 +189,7 @@ qd.output = qd(platform1.data=MAQC.AFX, platform2.data=MAQC.ILM, skip.match=FALS
 
 #Perform qn
 qn.output = qn(platform1.data=MAQC.AFX, platform2.data=MAQC.ILM, skip.match=FALSE)
-
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

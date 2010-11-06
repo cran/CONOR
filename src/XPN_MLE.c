@@ -65,7 +65,7 @@ void XPN_MLE_C_C(double *xbar, double *A, double *b, double *c, double *s2, doub
 	while(changed && (iter < 100)){
 		iter++;
 	//	Rprintf("%d ",iter);
-		fflush(stdout);
+	//	fflush(stdout);
 
 
 	
